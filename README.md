@@ -24,7 +24,7 @@ E o melhor de tudo: além de super útil, tem a minha cara! 🤭
 O **Ingryd's Workspace** está disponível online para interação e demonstração.
 
 <p align="center">
-  <a href="https://ingrydbacelar.github.io/ingryds-workspace/Ingryds_Workspace.html">
+  <a href="https://ingrydbacelar.github.io/ingryds-workspace/index.html">
     <img src="https://img.shields.io/badge/Acessar%20Workspace-8FBFC5?style=for-the-badge&logoColor=white" alt="Acessar Workspace">
   </a>
 </p>
