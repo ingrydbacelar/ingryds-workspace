@@ -6,18 +6,20 @@
 
 ## Sobre o projeto
 
-Desenvolvi o **Ingryd’s Workspace** com o objetivo de reduzir o excesso de abas abertas no navegador e centralizar tudo o que preciso para organizar minha rotina.
+Desenvolvi o **Ingryd’s Workspace** com o objetivo de reduzir o excesso de abas abertas no navegador e centralizar tudo o que preciso para organizar minha rotina
 
-O **Workspace** reúne links, ferramentas, plataformas, planilhas e recursos que utilizo no dia a dia **em um só lugar**, facilitando o acesso às informações e otimizando a visualização e o acompanhamento das minhas demandas.
+O Workspace reúne links, ferramentas, plataformas, planilhas e recursos que utilizo no dia a dia **em um só lugar**, facilitando o acesso às informações e otimizando a visualização e o acompanhamento das minhas demandas.
+
+Além disso, conta com **sincronização de dados** por e-mail utilizando Firebase, permitindo manter minhas informações sincronizadas e acessíveis de forma prática.
 
 E o melhor de tudo: além de super útil, tem a minha cara! 🤭
 
 ## Tecnologias
-
 - HTML5
 - CSS3
 - JavaScript
 - LocalStorage
+- Firebase
 
 ## Demonstração
 
