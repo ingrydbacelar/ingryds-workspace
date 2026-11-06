@@ -1,7 +1,7 @@
 # Ingryd's Workspace
 
 <p align="center">
-  <img width="1191" height="718" alt="Ingryd's Workspace" src="https://github.com/user-attachments/assets/eab6aa4b-8a73-419a-83e2-08fc3c3d4cbc" />
+  <img width="1191" height="718" alt="Ingryd's Workspace" src="https://github.com/user-attachments/assets/bc163378-87b3-475a-bf7f-9e2693baddc7" />
 </p>
 
 ## Sobre o projeto
