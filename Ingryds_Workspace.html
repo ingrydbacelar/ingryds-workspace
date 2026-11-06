@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Ingryd’s Workspace</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Nunito+Sans:wght@400;600&display=swap">
+
+<link rel="icon" type="image/png" sizes="512x512" href="./caderno.png">
+<link rel="apple-touch-icon" href="./caderno.png">
+<meta name="theme-color" content="#78AEB5">
+
+<style>
+:root{
+  --ceu:#cfe3e4; --ceu-2:#b7d3d7; --turquesa:#6fa3b0; --profundo:#2c5866;
+  --oliva:#7d8b5c; --flor:#f4f1dc; --rosa:#e6bfb8; --tinta:#25353a; --tinta-2:#4d6268;
+  --quadro:url(amendoeira.jpg);
+  --superficie:#f7f5e6; --borda:#b3ccd0;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
+  color-scheme:light;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --ceu:#16282d; --ceu-2:#1d3339; --turquesa:#6fa3b0; --profundo:#0f2227;
+    --oliva:#a3b27c; --flor:#f1edd2; --rosa:#d9a9a1; --tinta:#e8efe9; --tinta-2:#a9bfc2;
+    --superficie:#1f353b; --borda:#2f4a51; color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --ceu:#16282d; --ceu-2:#1d3339; --turquesa:#6fa3b0; --profundo:#0f2227;
+  --oliva:#a3b27c; --flor:#f1edd2; --rosa:#d9a9a1; --tinta:#e8efe9; --tinta-2:#a9bfc2;
+  --superficie:#1f353b; --borda:#2f4a51; color-scheme:dark;
+}
+html{scroll-padding-top:env(safe-area-inset-top,0px);-webkit-text-size-adjust:100%}
+*{box-sizing:border-box}
+body{margin:0;background:var(--ceu);color:var(--tinta);font-family:"Nunito Sans",system-ui,sans-serif;line-height:1.55;min-height:100vh}
+.app{display:grid;grid-template-columns:260px 1fr;min-height:100vh}
+aside{background:var(--profundo);color:#eef2df;padding:28px 18px 24px;display:flex;flex-direction:column;position:sticky;top:0;height:100vh;overflow:hidden}
+.marca{font-family:Fraunces,Georgia,serif;font-size:1.35rem;font-weight:600;margin:0 8px 2px;color:#f4f1dc}
+.sub{margin:0 8px 26px;font-size:.85rem;color:#a9c4c9}
+nav{display:flex;flex-direction:column;gap:6px;position:relative;z-index:1}
+nav button{all:unset;cursor:pointer;display:flex;align-items:center;gap:12px;padding:11px 12px;border-radius:12px;font-weight:600;color:#d6e3e0}
+nav button:hover{background:rgba(244,241,220,.09)}
+nav button:focus-visible{outline:2px solid var(--rosa);outline-offset:2px}
+nav button[aria-current="page"]{background:#f4f1dc;color:#2c5866}
+nav svg{width:22px;height:22px;flex:none}
+main{padding:40px max(clamp(14px,2.5vw,32px),env(safe-area-inset-right,0px)) 56px max(clamp(14px,2.5vw,32px),env(safe-area-inset-left,0px));width:100%;min-width:0}
+.topo{display:block;text-align:center}
+@media (min-width:1000px){
+  main{padding-right:max(32px,11vw)}
+  main>*{max-width:880px;margin-left:auto;margin-right:auto}
+}
+h1{font-family:Fraunces,Georgia,serif;font-weight:600;font-size:clamp(2rem,4vw,2.8rem);margin:0;line-height:1.1;color:var(--profundo)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) h1{color:var(--flor)}}
+:root[data-theme="dark"] h1{color:var(--flor)}
+.lede{margin:8px auto 0;color:var(--tinta-2);max-width:52ch}
+.vazio{margin-top:36px;background:var(--superficie);border:1.5px dashed var(--turquesa);border-radius:20px;padding:44px 28px;text-align:center}
+.vazio svg{width:64px;height:64px;margin-bottom:8px}
+.vazio h2{font-family:Fraunces,Georgia,serif;font-weight:500;font-size:1.35rem;margin:0 0 6px}
+.vazio p{margin:0 auto;color:var(--tinta-2);max-width:44ch}
+.galho{position:absolute;left:0;right:0;bottom:0;height:340px;background:var(--quadro) 30% 55%/cover;pointer-events:none;-webkit-mask-image:linear-gradient(to top,#000 0%,#000 30%,rgba(0,0,0,.92) 40%,rgba(0,0,0,.78) 50%,rgba(0,0,0,.58) 60%,rgba(0,0,0,.38) 70%,rgba(0,0,0,.2) 80%,rgba(0,0,0,.07) 90%,transparent 100%);mask-image:linear-gradient(to top,#000 0%,#000 30%,rgba(0,0,0,.92) 40%,rgba(0,0,0,.78) 50%,rgba(0,0,0,.58) 60%,rgba(0,0,0,.38) 70%,rgba(0,0,0,.2) 80%,rgba(0,0,0,.07) 90%,transparent 100%)}
+[hidden]{display:none!important}
+.rapidos{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;margin:28px 0 24px;padding-bottom:22px;border-bottom:1px solid var(--borda)}
+.pilula{display:inline-flex;align-items:center;gap:9px;padding:10px 20px;border-radius:999px;background:var(--profundo);border:1px solid var(--borda);color:#f4f1dc;text-decoration:none;font-weight:600}
+.pilula:hover{background:var(--turquesa);color:#14282d}
+.desc{display:block;font-size:.85rem;font-weight:400;color:var(--tinta-2)}
+.info{all:unset;box-sizing:border-box;cursor:pointer;flex:none;width:40px;height:40px;display:inline-flex;align-items:center;justify-content:center;border-radius:50%;color:var(--tinta-2);margin-right:6px}
+.info svg{width:22px;height:22px}
+.info:hover,.info[aria-expanded="true"]{background:color-mix(in srgb,var(--turquesa) 22%,transparent);color:var(--tinta)}
+.info:focus-visible{outline:2px solid var(--turquesa);outline-offset:2px}
+.painel{flex-basis:100%;margin:0;padding:4px 18px 16px;font-size:.92rem;color:var(--tinta-2)}
+.metas{background:#f6efdc;color:#4a4130;border:1px solid #e3d8bb;border-radius:16px;padding:12px 18px 14px;box-shadow:0 1px 0 rgba(0,0,0,.03)}
+.metas label{display:block;font:600 .8rem "Nunito Sans",system-ui,sans-serif;letter-spacing:.06em;text-transform:uppercase;color:#8a7d5c;margin-bottom:2px}
+.metas textarea{all:unset;display:block;box-sizing:border-box;width:100%;min-height:calc(1.9rem * 4);padding:0;font:400 1rem/1.9rem "Nunito Sans",system-ui,sans-serif;color:#4a4130;white-space:pre-wrap;overflow-wrap:anywhere;background-image:repeating-linear-gradient(to bottom,transparent 0,transparent calc(1.9rem - 1px),rgba(138,125,92,.22) calc(1.9rem - 1px),rgba(138,125,92,.22) 1.9rem);background-attachment:local}
+.metas textarea::placeholder{color:#a89c7c}
+.metas textarea:focus-visible{outline:none}
+.metas:focus-within{border-color:#cdbf98}
+.linha-topo{display:grid;grid-template-columns:minmax(0,1fr) minmax(250px,300px);gap:12px;align-items:stretch}
+.metas{display:flex;flex-direction:column}
+.metas textarea{flex:1 1 auto}
+.progresso{background:color-mix(in srgb,var(--superficie) 70%,transparent);border:1px solid var(--borda);border-radius:16px;padding:4px 16px}
+.grupo{padding:12px 0 12px}
+.grupo+.grupo{border-top:1px solid var(--borda)}
+.grupo-topo{display:flex;align-items:baseline;gap:8px;margin-bottom:8px}
+.grupo-topo h3{margin:0;flex:1;font:600 .78rem "Nunito Sans",system-ui,sans-serif;letter-spacing:.05em;text-transform:uppercase;color:var(--tinta-2)}
+.grupo-topo h3 span{font-weight:400;text-transform:none;letter-spacing:0;opacity:.8;margin-left:4px}
+.cont{font-size:.75rem;color:var(--tinta-2)}
+.limpar{all:unset;cursor:pointer;font-size:.72rem;color:var(--tinta-2);opacity:.7;text-decoration:underline;text-underline-offset:2px}
+.limpar:hover{opacity:1}
+.limpar:focus-visible,.marca-passo:focus-visible{outline:2px solid var(--turquesa);outline-offset:2px;border-radius:6px}
+.trilha{list-style:none;margin:0;padding:0}
+.passo{position:relative}
+.passo:not(:last-child)::after{content:"";position:absolute;left:8px;top:22px;bottom:-4px;width:2px;background:var(--borda);transition:background .25s}
+.passo.feito:not(:last-child)::after{background:var(--oliva)}
+.marca-passo{all:unset;cursor:pointer;box-sizing:border-box;display:flex;align-items:center;gap:10px;width:100%;padding:3px 0}
+.bolinha{flex:none;width:18px;height:18px;border-radius:50%;border:1.5px solid var(--turquesa);background:var(--superficie);display:flex;align-items:center;justify-content:center;color:transparent;position:relative;z-index:1;transition:background .2s,border-color .2s,color .2s}
+.bolinha svg{width:11px;height:11px}
+.marca-passo:hover .bolinha{background:color-mix(in srgb,var(--turquesa) 22%,var(--superficie))}
+.passo.feito .bolinha{background:var(--oliva);border-color:var(--oliva);color:#fff}
+.rot{font-size:.82rem;line-height:1.3;color:var(--tinta);overflow-wrap:anywhere}
+.passo.feito .rot{color:var(--tinta-2);opacity:.75;text-decoration:line-through;text-decoration-color:color-mix(in srgb,var(--tinta-2) 45%,transparent)}
+@media (max-width:760px){.linha-topo{grid-template-columns:1fr}}
+.par{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;align-items:start}
+@media (max-width:640px){.par{grid-template-columns:1fr}}
+.modulos{display:flex;flex-direction:column;gap:12px}
+.item{display:flex;flex-wrap:wrap;align-items:center;gap:8px;background:var(--superficie);border:1px solid var(--borda);border-radius:16px}
+.item-link{flex:1;display:flex;align-items:center;gap:14px;padding:16px 18px;color:inherit;text-decoration:none;min-width:0;border-radius:16px}
+.item-link:hover,.celula:hover{background:color-mix(in srgb,var(--turquesa) 16%,transparent)}
+.pilula:focus-visible,.item-link:focus-visible,.celula:focus-visible,.btn:focus-visible,input:focus-visible{outline:2px solid var(--turquesa);outline-offset:2px}
+.ic{width:24px;height:24px;flex:none;color:var(--turquesa)}
+.nome{font-weight:600;display:block;overflow-wrap:anywhere}
+.nota{display:block;font-size:.85rem;color:var(--tinta-2)}
+.btn{all:unset;cursor:pointer;margin-right:14px;padding:7px 14px;border-radius:999px;border:1px solid var(--turquesa);font-size:.85rem;font-weight:600;color:var(--tinta)}
+.btn:hover{background:color-mix(in srgb,var(--turquesa) 20%,transparent)}
+.caixa{flex-basis:100%;display:flex;gap:8px;flex-wrap:wrap;padding:0 18px 16px}
+.caixa input{flex:1;min-width:200px;padding:9px 12px;border-radius:10px;border:1px solid var(--borda);background:var(--ceu);color:var(--tinta);font:inherit}
+.caixa input[aria-invalid="true"]{border-color:#c0584b}
+.caixa .btn{margin-right:0}
+.erro{flex-basis:100%;margin:0;font-size:.85rem}
+.planilhas{border-radius:16px;overflow:hidden;border:1px solid color-mix(in srgb,var(--oliva) 70%,transparent);background:color-mix(in srgb,var(--oliva) 18%,var(--superficie))}
+.planilhas h2{margin:0;padding:11px 18px;font:600 .95rem "Nunito Sans",system-ui,sans-serif;background:color-mix(in srgb,var(--oliva) 55%,#000);color:#f4f1dc}
+.planilhas h2 span{font-weight:400;opacity:.85;margin-left:10px}
+.celulas{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr))}
+.cel{position:relative;border-right:1px solid color-mix(in srgb,var(--oliva) 55%,transparent);border-bottom:1px solid color-mix(in srgb,var(--oliva) 55%,transparent);margin:0 -1px -1px 0}
+.celula{display:flex;align-items:center;gap:12px;padding:22px 52px 22px 18px;color:var(--tinta);text-decoration:none;font-weight:600}
+.cel .info{position:absolute;top:16px;right:10px}
+.cel .painel{margin:0;border-top:1px solid color-mix(in srgb,var(--oliva) 40%,transparent)}
+.celula .ic{color:var(--oliva)}
+.celula:hover{background:color-mix(in srgb,var(--oliva) 30%,transparent)}
+.tema{all:unset;box-sizing:border-box;cursor:pointer;position:fixed;top:calc(env(safe-area-inset-top,0px) + 12px);right:calc(env(safe-area-inset-right,0px) + 14px);z-index:50;width:44px;height:44px;border-radius:50%;display:grid;place-items:center;background:var(--superficie);color:var(--tinta);border:1px solid var(--borda);box-shadow:0 2px 10px rgba(0,0,0,.18);-webkit-tap-highlight-color:transparent}
+.tema:hover{background:color-mix(in srgb,var(--turquesa) 22%,var(--superficie))}
+.tema:focus-visible{outline:2px solid var(--turquesa);outline-offset:2px}
+.tema svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.tema .sol{display:none}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .tema .sol{display:block}:root:not([data-theme="light"]) .tema .lua{display:none}}
+:root[data-theme="dark"] .tema .sol{display:block}
+:root[data-theme="dark"] .tema .lua{display:none}
+@media (max-width:760px){
+  .app{grid-template-columns:1fr}
+  aside{position:static;height:auto;padding:12px 14px 12px;overflow:visible}
+  .sub,.galho{display:none}
+  .marca{margin:0 60px 8px 8px;min-height:44px;display:flex;align-items:center;line-height:1.2}
+  nav{display:grid;grid-template-columns:repeat(3,1fr);gap:6px}
+  nav button{flex-direction:column;justify-content:center;gap:4px;min-height:56px;padding:8px 6px;font-size:.82rem;text-align:center}
+  main{padding-top:24px;padding-bottom:40px}
+  .rapidos{margin:20px 0 18px;padding-bottom:18px}
+  .pilula{min-height:44px;padding:11px 20px}
+  .item-link{padding:14px}
+  .btn{display:inline-flex;align-items:center;min-height:40px;padding:8px 16px}
+  .caixa input{font-size:16px;padding:12px}
+}
+@media (max-width:520px){
+  .item:has(.btn) .item-link{flex-basis:calc(100% - 52px)}
+  .item>.btn{margin:0 14px 14px}
+  .caixa{padding:0 14px 14px}
+  .caixa input{flex-basis:100%;min-width:0}
+  .caixa .btn{flex:1;justify-content:center}
+  .celulas{grid-template-columns:1fr}
+  .celula{padding:16px}
+  .planilhas h2 span{display:block;margin:2px 0 0}
+  .vazio{padding:32px 18px}
+}
+</style>
+</head>
+<body>
+<button class="tema" id="tema" type="button" aria-label="Alternar entre tema claro e escuro" title="Alternar tema"><svg class="lua" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 14.5A8 8 0 0 1 9.500 4a8 8 0 1 0 10.500 10.500z"/></svg><svg class="sol" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.900 4.900l1.400 1.400M17.700 17.700l1.400 1.400M2 12h2M20 12h2M4.900 19.100l1.400-1.400M17.700 6.300l1.400-1.400"/></svg></button>
+<div class="app">
+  <aside>
+    <p class="marca">Ingryd’s Workspace</p>
+    <p class="sub">Minhas demandas, um só lugar</p>
+    <nav aria-label="Áreas">
+      <button data-area="trabalho"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M9 7V5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2M3 13h18"/></svg>Trabalho</button>
+      <button data-area="pessoal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.600-7 10-7 10z"/></svg>Pessoal</button>
+      <button data-area="estudos"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8l9-4 9 4-9 4-9-4z"/><path d="M7 10.500V15c0 1.200 2.200 2.500 5 2.500s5-1.300 5-2.500v-4.500"/></svg>Estudos</button>
+    </nav>
+    <div class="galho" role="img" aria-label="Amendoeira em flor, de Vincent van Gogh"></div>
+  </aside>
+  <main id="conteudo" tabindex="-1">
+    <div class="topo">
+      <div>
+        <h1 id="titulo"></h1>
+        <p class="lede" id="descricao"></p>
+      </div>
+    </div>
+    <div id="area-trabalho" hidden>
+      <div class="rapidos">
+        <a class="pilula" href="https://chat.google.com/app/home" target="_blank" rel="noopener noreferrer"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a8 8 0 0 1-11.8 7L4 20l1.2-4.2A8 8 0 1 1 21 12z"/></svg>Chat</a>
+        <a class="pilula" href="https://meet.google.com/home" target="_blank" rel="noopener noreferrer"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="6" width="13" height="12" rx="2"/><path d="m16 10 5-3v10l-5-3z"/></svg>Meet</a>
+      </div>
+      <div class="modulos">
+        <div class="linha-topo">
+          <div class="metas">
+          <label for="metas-texto">Metas da semana</label>
+          <textarea id="metas-texto" rows="4" placeholder="Escreva aqui suas metas da semana…"></textarea>
+        </div>
+          <section class="progresso" aria-label="Progresso da semana">
+          <div class="grupo" data-g="hig">
+            <div class="grupo-topo"><h3>Higienização <span>toda semana</span></h3><span class="cont" aria-live="polite">0/4</span><button type="button" class="limpar">Limpar</button></div>
+            <ol class="trilha" style="--n:4"><li class="passo"><button type="button" class="marca-passo" data-k="hig-0" aria-pressed="false"><span class="bolinha"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg></span><span class="rot">Minha higienização</span></button></li><li class="passo"><button type="button" class="marca-passo" data-k="hig-1" aria-pressed="false"><span class="bolinha"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg></span><span class="rot">Lista canais</span></button></li><li class="passo"><button type="button" class="marca-passo" data-k="hig-2" aria-pressed="false"><span class="bolinha"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg></span><span class="rot">Exclusão</span></button></li><li class="passo"><button type="button" class="marca-passo" data-k="hig-3" aria-pressed="false"><span class="bolinha"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg></span><span class="rot">OKR</span></button></li></ol>
+          </div>
+          <div class="grupo" data-g="ext">
+            <div class="grupo-topo"><h3>Extração de listas <span>uma vez na semana</span></h3><span class="cont" aria-live="polite">0/8</span><button type="button" class="limpar">Limpar</button></div>
+            <ol class="trilha" style="--n:8"><li class="passo"><button type="button" class="marca-passo" data-k="ext-0" aria-pressed="false"><span class="bolinha"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg></span><span class="rot">Atualizar aproveitamento</span></button></li><li class="passo"><button type="button" class="marca-passo" data-k="ext-1" aria-pressed="false"><span class="bolinha"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg></span><span class="rot">Baixar Off Limits</span></button></li><li class="passo"><button type="button" class="marca-passo" data-k="ext-2" aria-pressed="false"><span class="bolinha"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg></span><span class="rot">Extrair listas Apollo</span></button></li><li class="passo"><button type="button" class="marca-passo" data-k="ext-3" aria-pressed="false"><span class="bolinha"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg></span><span class="rot">Atualizar semana de corte</span></button></li><li class="passo"><button type="button" class="marca-passo" data-k="ext-4" aria-pressed="false"><span class="bolinha"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg></span><span class="rot">Controle de créditos</span></button></li><li class="passo"><button type="button" class="marca-passo" data-k="ext-5" aria-pressed="false"><span class="bolinha"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg></span><span class="rot">Filtro de exclusão</span></button></li><li class="passo"><button type="button" class="marca-passo" data-k="ext-6" aria-pressed="false"><span class="bolinha"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg></span><span class="rot">Colocar arquivos em Listas</span></button></li><li class="passo"><button type="button" class="marca-passo" data-k="ext-7" aria-pressed="false"><span class="bolinha"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg></span><span class="rot">Criar pasta semanal</span></button></li></ol>
+          </div>
+        </section>
+        </div>
+        <div class="item">
+          <a class="item-link" id="link-higienizacao" href="https://docs.google.com/spreadsheets/d/1DcX68po_cm4cw6DErd0v222MfyWq2hSkOIAVmF_2Z1I/edit" target="_blank" rel="noopener noreferrer"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l2 5 5 2-5 2-2 5-2-5-5-2 5-2z"/></svg><span><span class="nome">Higienização semanal</span></span></a>
+          <button class="btn" id="editar-hig" type="button">Atualizar link</button>
+          <div class="caixa" id="caixa-hig" hidden>
+            <input id="input-hig" type="url" placeholder="Cole aqui o link da planilha da semana" aria-label="Link da planilha da semana">
+            <button class="btn" id="salvar-hig" type="button">Salvar</button>
+            <p class="erro" id="erro-hig" hidden>Cole um link que comece com https://</p>
+          </div>
+        </div>
+        <div class="par">
+        <div class="item"><a class="item-link" href="https://drive.google.com/drive/folders/1dCz2LI1BJfaSCdCXY3l5xf3jiubEXEZu" target="_blank" rel="noopener noreferrer"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg><span><span class="nome">Geração de Listas DW</span></span></a><button class="info" type="button" aria-expanded="false" aria-label="Sobre Geração de Listas DW"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 11v5"/><circle cx="12" cy="7.8" r=".6" fill="currentColor"/></svg></button><div class="painel" hidden>Criar pasta no modelo: 108. Semana 02/11/26</div></div>
+        <div class="item"><a class="item-link" href="https://drive.google.com/drive/folders/1S2C35CSs4k4LxWZavQTt5FqmmPmkgfil" target="_blank" rel="noopener noreferrer"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg><span><span class="nome">Listas Canais</span></span></a><button class="info" type="button" aria-expanded="false" aria-label="Sobre Listas Canais"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 11v5"/><circle cx="12" cy="7.8" r=".6" fill="currentColor"/></svg></button><div class="painel" hidden>Entregar toda segunda às 8 da manhã</div></div>
+        </div>
+        <section class="planilhas" aria-labelledby="tit-planilhas">
+          <h2 id="tit-planilhas">Planilhas <span>uso no fim da semana</span></h2>
+          <div class="celulas">
+            <div class="cel">
+  <a class="celula"
+     href="https://docs.google.com/spreadsheets/d/1yirWoZCdO1gZAYNBRRs0do-DqGXhioFsZddV4NcDXoI/edit?pli=1&gid=357613647#gid=357613647"
+     target="_blank"
+     rel="noopener noreferrer">
+    <svg class="ic" viewBox="0 0 24 24" fill="none"
+         stroke="currentColor" stroke-width="1.8"
+         stroke-linecap="round" stroke-linejoin="round">
+      <rect x="4" y="4" width="16" height="16" rx="2"/>
+      <path d="M4 10h16M4 15h16M10 4v16"/>
+    </svg>
+    <span>
+      <span class="nome">Exclusão</span>
+    </span>
+  </a>
+</div>
+
+<div class="cel">
+  <a class="celula"
+     href="https://docs.google.com/spreadsheets/d/1fbku7qfIzCBzi8r3AtcD8w6mXzI8sGCF41Ie1-j0p3c/edit?pli=1"
+     target="_blank"
+     rel="noopener noreferrer">
+    <svg class="ic" viewBox="0 0 24 24" fill="none"
+         stroke="currentColor" stroke-width="1.8"
+         stroke-linecap="round" stroke-linejoin="round">
+      <rect x="4" y="4" width="16" height="16" rx="2"/>
+      <path d="M4 10h16M4 15h16M10 4v16"/>
+    </svg>
+    <span>
+      <span class="nome">OKR</span>
+    </span>
+  </a>
+</div>
+
+<div class="cel">
+  <a class="celula"
+     href="https://docs.google.com/spreadsheets/d/1Rwa1ADnGNx3v6DNnru1gjoOVJWPJUP2Z3fjOCz4cV1o/edit?gid=1646449730#gid=1646449730"
+     target="_blank"
+     rel="noopener noreferrer">
+    <svg class="ic" viewBox="0 0 24 24" fill="none"
+         stroke="currentColor" stroke-width="1.8"
+         stroke-linecap="round" stroke-linejoin="round">
+      <rect x="4" y="4" width="16" height="16" rx="2"/>
+      <path d="M4 10h16M4 15h16M10 4v16"/>
+    </svg>
+    <span>
+      <span class="nome">Aproveitamento</span>
+    </span>
+  </a>
+</div>
+          </div>
+        </section>
+        <div class="par">
+        <div class="item"><a class="item-link" href="https://docs.google.com/spreadsheets/d/14AHQC3XNmcQOs9AGO9MTDnNRcfj6ZP0jcNt5gJ2qQPw/edit?gid=2061143958#gid=2061143958" target="_blank" rel="noopener noreferrer"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v11M7 11l5 5 5-5M5 20h14"/></svg><span><span class="nome">Off Limits</span></span></a><button class="info" type="button" aria-expanded="false" aria-label="Sobre Off Limits"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 11v5"/><circle cx="12" cy="7.8" r=".6" fill="currentColor"/></svg></button><div class="painel" hidden>Baixar sempre antes da extração de listas</div></div>
+        <div class="item"><a class="item-link" href="https://docs.google.com/spreadsheets/d/1NEY-BMFKGkeL60KVvH5x4O8jXU3avUPAL4Eewcy-5Mg/edit?gid=1984311631#gid=1984311631" target="_blank" rel="noopener noreferrer"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="6" width="18" height="13" rx="2"/><path d="M3 10h18M7 15h4"/></svg><span><span class="nome">Controle de créditos</span></span></a><button class="info" type="button" aria-expanded="false" aria-label="Sobre Controle de créditos"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 11v5"/><circle cx="12" cy="7.8" r=".6" fill="currentColor"/></svg></button><div class="painel" hidden>Atualizar a cada uso do Apollo</div></div>
+        </div>
+        <div class="par">
+        <div class="item"><a class="item-link" href="https://docs.google.com/spreadsheets/d/1L3Yd2FhHz0wUokxIOcwpc9CBR75U_k4vjDjMgabRstw/edit?gid=2001068780#gid=2001068780" target="_blank" rel="noopener noreferrer"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="5" width="16" height="15" rx="2"/><path d="M4 10h16M9 3v4M15 3v4"/></svg><span><span class="nome">Controle de semanas de corte</span></span></a><button class="info" type="button" aria-expanded="false" aria-label="Sobre Controle de semanas de corte"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 11v5"/><circle cx="12" cy="7.8" r=".6" fill="currentColor"/></svg></button><div class="painel" hidden>Atualizar durante a extração de listas</div></div>
+        <div class="item"><a class="item-link" href="https://app.apollo.io/#/home" target="_blank" rel="noopener noreferrer"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3c3 2 5 5.5 5 9l-2 3H9l-2-3c0-3.5 2-7 5-9z"/><circle cx="12" cy="10" r="1.5"/><path d="M9 15l-2 4 3-1M15 15l2 4-3-1"/></svg><span><span class="nome">Apollo</span></span></a><button class="info" type="button" aria-expanded="false" aria-label="Sobre Apollo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 11v5"/><circle cx="12" cy="7.8" r=".6" fill="currentColor"/></svg></button><div class="painel" hidden>Checar os filtros</div></div>
+        </div>
+        <div class="par">
+        <div class="item"><a class="item-link" href="https://colab.research.google.com/drive/1bIqePQ3OcM6x6LNT454LJuMaNgfY5-E3?usp=drive-dynamite" target="_blank" rel="noopener noreferrer"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h16l-6 8v6l-4-2v-4z"/></svg><span><span class="nome">Filtro de exclusão</span></span></a><button class="info" type="button" aria-expanded="false" aria-label="Sobre Filtro de exclusão"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 11v5"/><circle cx="12" cy="7.8" r=".6" fill="currentColor"/></svg></button><div class="painel" hidden>Ter Off Limits e lista de Exclusão da semana baixadas. "N" apenas na primeira extração da semana e sempre "n" na segunda"</div></div>
+        <div class="item"><a class="item-link" href="https://drive.google.com/drive/folders/1dFOJ_B9136aag536seJl9hSqr1W37p5s" target="_blank" rel="noopener noreferrer"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg><span><span class="nome">Listas</span></span></a><button class="info" type="button" aria-expanded="false" aria-label="Sobre Listas"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 11v5"/><circle cx="12" cy="7.8" r=".6" fill="currentColor"/></svg></button><div class="painel" hidden>Colocar os arquivos da semana após passar pelo filtro de Exclusão</div></div>
+        </div>
+      </div>
+    </div>
+    <section class="vazio" id="area-vazio" aria-live="polite">
+      <svg viewBox="0 0 64 64" aria-hidden="true"><path d="M6 58C20 46 30 34 44 18" stroke="#7d8b5c" stroke-width="3.500" fill="none" stroke-linecap="round"/><g fill="#f4f1dc" stroke="#6fa3b0" stroke-width="1.500"><circle cx="46" cy="16" r="8"/><circle cx="28" cy="36" r="6"/><circle cx="16" cy="48" r="5"/></g><g fill="#e6bfb8"><circle cx="46" cy="16" r="3"/><circle cx="28" cy="36" r="2.200"/></g></svg>
+      <h2 id="vazio-titulo"></h2>
+      <p>Esta área ainda não tem módulos. Escolha o primeiro para começar a registrar suas demandas.</p>
+    </section>
+  </main>
+</div>
+<script>
+(function(){
+
+  (function(){
+    var CH="progresso-semana", est={};
+    try{ est=JSON.parse(localStorage.getItem(CH)||"{}")||{}; }catch(e){ est={}; }
+    function salva(){ try{ localStorage.setItem(CH,JSON.stringify(est)); }catch(e){} }
+    function pinta(g){
+      var bs=g.querySelectorAll(".marca-passo"), f=0;
+      bs.forEach(function(b){
+        var on=!!est[b.dataset.k]; if(on) f++;
+        b.setAttribute("aria-pressed",on?"true":"false");
+        b.parentNode.classList.toggle("feito",on);
+      });
+      g.querySelector(".cont").textContent=f+"/"+bs.length;
+    }
+    document.querySelectorAll(".grupo").forEach(function(g){
+      pinta(g);
+      g.addEventListener("click",function(e){
+        var b=e.target.closest(".marca-passo");
+        if(b){ est[b.dataset.k]=!est[b.dataset.k]; salva(); pinta(g); return; }
+        if(e.target.closest(".limpar")){
+          g.querySelectorAll(".marca-passo").forEach(function(x){ delete est[x.dataset.k]; });
+          salva(); pinta(g);
+        }
+      });
+    });
+  })();
+
+  (function(){
+    var t=document.getElementById("metas-texto"); if(!t) return;
+    function ajusta(){ t.style.height="auto"; t.style.height=Math.max(t.scrollHeight,0)+"px"; }
+    try{ t.value=localStorage.getItem("metas")||""; }catch(e){}
+    ajusta();
+    t.addEventListener("input",function(){ ajusta(); try{ localStorage.setItem("metas",t.value); }catch(e){} });
+    window.addEventListener("resize",ajusta);
+    document.addEventListener("click",function(){ setTimeout(ajusta,0); });
+  })();
+
+  document.addEventListener("click",function(e){
+    var b=e.target.closest(".info");if(!b)return;
+    var p=b.parentNode.querySelector(".painel");if(!p)return;
+    var abrir=p.hidden;p.hidden=!abrir;b.setAttribute("aria-expanded",abrir?"true":"false");
+  });
+  var AREAS={
+    trabalho:{t:"Trabalho",d:"Tudo o que depende de mim: entregas, pendências e prazos."},
+    pessoal:{t:"Pessoal",d:"Minhas ideias, projetos e interesses."},
+    estudos:{t:"Estudos",d:"Meus cursos, leituras e metas de aprendizado."}
+  };
+  var botoes=document.querySelectorAll("nav button");
+  function mostrar(id){
+    if(!AREAS[id]) id="trabalho";
+    document.getElementById("titulo").textContent=AREAS[id].t;
+    document.getElementById("descricao").textContent=AREAS[id].d;
+    document.getElementById("vazio-titulo").textContent="Nenhum módulo em "+AREAS[id].t;
+    document.title=AREAS[id].t+" · Ingryd’s Workspace";
+    document.getElementById("area-trabalho").hidden=(id!=="trabalho");
+    document.getElementById("area-vazio").hidden=(id==="trabalho");
+    botoes.forEach(function(b){
+      if(b.dataset.area===id) b.setAttribute("aria-current","page"); else b.removeAttribute("aria-current");
+    });
+  }
+  botoes.forEach(function(b){
+    b.addEventListener("click",function(){ location.hash=b.dataset.area; });
+  });
+  window.addEventListener("hashchange",function(){ mostrar(location.hash.slice(1)); });
+  mostrar(location.hash.slice(1));
+  var CHAVE="higienizacao_link",PADRAO="https://docs.google.com/spreadsheets/d/1DcX68po_cm4cw6DErd0v222MfyWq2hSkOIAVmF_2Z1I/edit";
+  var lh=document.getElementById("link-higienizacao"),cx=document.getElementById("caixa-hig"),inp=document.getElementById("input-hig"),er=document.getElementById("erro-hig");
+  try{ lh.href=localStorage.getItem(CHAVE)||PADRAO; }catch(e){ lh.href=PADRAO; }
+  document.getElementById("editar-hig").addEventListener("click",function(){
+    cx.hidden=!cx.hidden;
+    if(!cx.hidden){ inp.value=lh.href; inp.focus(); inp.select(); }
+  });
+  function salvarHig(){
+    var v=inp.value.trim();
+    if(!/^https:\/\//i.test(v)){ inp.setAttribute("aria-invalid","true"); er.hidden=false; return; }
+    inp.removeAttribute("aria-invalid"); er.hidden=true;
+    lh.href=v;
+    try{ localStorage.setItem(CHAVE,v); }catch(e){}
+    cx.hidden=true;
+  }
+  document.getElementById("salvar-hig").addEventListener("click",salvarHig);
+  inp.addEventListener("keydown",function(e){ if(e.key==="Enter") salvarHig(); });
+  var raiz=document.documentElement;
+  try{ var salvo=localStorage.getItem("tema"); if(salvo) raiz.setAttribute("data-theme",salvo); }catch(e){}
+  var bt=document.getElementById("tema");
+  function ehEscuro(){ return raiz.getAttribute("data-theme")==="dark"||(!raiz.getAttribute("data-theme")&&matchMedia("(prefers-color-scheme: dark)").matches); }
+  function sincronizar(){ bt.setAttribute("aria-pressed",ehEscuro()?"true":"false"); }
+  sincronizar();
+  bt.addEventListener("click",function(){
+    var novo=ehEscuro()?"light":"dark";
+    raiz.setAttribute("data-theme",novo);
+    try{ localStorage.setItem("tema",novo); }catch(e){}
+    sincronizar();
+  });
+})();
+</script>
+</body>
+</html>
