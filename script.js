@@ -1,6 +1,3 @@
-/* Ingryd’s Workspace — scripts */
-
-/* ===== Áreas, listas e preferências ===== */
 (function(){
 
   (function(){
@@ -316,10 +313,8 @@
   });
   window.addEventListener("hashchange",function(){ mostrar(location.hash.slice(1)); });
   mostrar(location.hash.slice(1));
-  var CHAVE="higienizacao_link",PADRAO="";
+  var HIG_ID="trabalho-higienizacao-semanal";
   var lh=document.getElementById("link-higienizacao"),cx=document.getElementById("caixa-hig"),inp=document.getElementById("input-hig"),er=document.getElementById("erro-hig");
-  var _l=""; try{ _l=localStorage.getItem(CHAVE)||PADRAO; }catch(e){ _l=PADRAO; }
-  if(_l) lh.href=_l; else lh.removeAttribute("href");
   document.getElementById("editar-hig").addEventListener("click",function(){
     cx.hidden=!cx.hidden;
     if(!cx.hidden){ inp.value=lh.getAttribute("href")||""; inp.focus(); inp.select(); }
@@ -328,8 +323,7 @@
     var v=inp.value.trim();
     if(!/^https:\/\//i.test(v)){ inp.setAttribute("aria-invalid","true"); er.hidden=false; return; }
     inp.removeAttribute("aria-invalid"); er.hidden=true;
-    lh.href=v;
-    try{ localStorage.setItem(CHAVE,v); }catch(e){}
+    if(window.__edSetLink) window.__edSetLink(HIG_ID,v); else lh.href=v;
     cx.hidden=true;
   }
   document.getElementById("salvar-hig").addEventListener("click",salvarHig);
@@ -888,16 +882,32 @@
   var textos=[];
   base.concat(extra,tardios,tardios2,tardios3).forEach(function(e){ if(textos.indexOf(e)<0) textos.push(e); });
   (function(){ var est=document.getElementById("area-estudos"); if(!est) return; function dentro(e){ return est.contains(e)||!!e.closest("#area-projetos"); } var a=textos.filter(function(e){return !dentro(e);}), b=textos.filter(dentro); textos=a.concat(b); })();
-  textos.forEach(function(e,i){
-    e.classList.add("ed-t"); e.dataset.o=e.textContent; e.dataset.i=i;
-    if(ed.t[i]!=null && ed.t[i]!=="") e.textContent=ed.t[i];
+  /* chave estável do título: área + texto original + nº da repetição (não depende da ordem no HTML) */
+  var contaT={};
+  function chaveTexto(e){
+    var ar=e.closest("[id^='area-']"), b=(ar?ar.id:"geral")+"|"+e.dataset.o;
+    contaT[b]=(contaT[b]||0)+1; return b+"#"+(contaT[b]-1);
+  }
+  textos.forEach(function(e){
+    e.classList.add("ed-t"); e.dataset.o=e.textContent; e.dataset.k=chaveTexto(e);
+    var v=ed.t[e.dataset.k]; if(v!=null && v!=="") e.textContent=v;
   });
 
   /* --- links --- */
+  /* migração única: o link antigo de higienização (chave própria) vai para a regra comum */
+  try{ var leg=localStorage.getItem("higienizacao_link"); if(leg && !ed.l["trabalho-higienizacao-semanal"]){ ed.l["trabalho-higienizacao-semanal"]=leg; salva(); } }catch(e){}
   var links=Array.prototype.slice.call(document.querySelectorAll("a.pilula, a.item-link, a.celula"));
-  links.forEach(function(a,i){
-    a.dataset.h=a.getAttribute("href")||""; a.dataset.i=i;
-    if(ed.l[i] && a.id!=="link-higienizacao") a.setAttribute("href",ed.l[i]);
+  /* chave estável do link: o data-id do HTML (ex.: "trabalho-okr"); sem data-id, usa área + nome original */
+  function chaveLink(a){
+    if(a.dataset.id) return a.dataset.id;
+    var ar=a.closest("[id^='area-']"), n=a.querySelector(".nome, .ed-t");
+    console.warn("Link sem data-id:",a);
+    return "auto:"+(ar?ar.id:"")+"|"+(n?(n.dataset.o||n.textContent.trim()):"");
+  }
+  links.forEach(function(a){
+    a.dataset.h=a.getAttribute("href")||""; a.dataset.k=chaveLink(a);
+    var v=ed.l[a.dataset.k];
+    if(v) a.setAttribute("href",v);
   });
 
   /* --- nomes das abas (título e descrição de cada área) --- */
@@ -1007,13 +1017,15 @@
     (o.t||o.area?iT:iL).focus(); (o.t||o.area?iT:iL).select();
   }
   function aplicaLink(a,v){
-    var i=a.dataset.i;
+    var i=a.dataset.k;
     if(v){ a.setAttribute("href",v); } else if(a.dataset.h){ a.setAttribute("href",a.dataset.h); } else { a.removeAttribute("href"); }
-    if(a.id==="link-higienizacao"){ try{ localStorage.setItem("higienizacao_link",v||""); }catch(e){} }
-    else { if(v && v!==a.dataset.h) ed.l[i]=v; else delete ed.l[i]; salva(); }
+    if(v && v!==a.dataset.h) ed.l[i]=v; else delete ed.l[i];
+    salva();
   }
+  /* usado pelo botão "Atualizar link" da Higienização */
+  window.__edSetLink=function(id,v){ var a=document.querySelector('a[data-id="'+id+'"]'); if(a) aplicaLink(a,v); };
   function aplicaTitulo(t,v){
-    v=v.trim(); var i=t.dataset.i;
+    v=v.trim(); var i=t.dataset.k;
     if(v){ t.textContent=v; if(v!==t.dataset.o) ed.t[i]=v; else delete ed.t[i]; }
     else { t.textContent=t.dataset.o; delete ed.t[i]; }
     salva();
