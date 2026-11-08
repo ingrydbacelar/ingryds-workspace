@@ -1,3 +1,6 @@
+/* Ingryd’s Workspace — scripts */
+
+/* ===== Áreas, listas e preferências ===== */
 (function(){
 
   (function(){
