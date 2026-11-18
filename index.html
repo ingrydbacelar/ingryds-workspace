@@ -4,12 +4,9 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Ingryd’s Workspace</title>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Nunito+Sans:wght@400;600&display=swap">
-
-<link rel="icon" type="image/png" sizes="512x512" href="./caderno.png">
-<link rel="apple-touch-icon" href="./caderno.png">
+<meta name="description" content="Minhas demandas, um só lugar: trabalho, estudos, projetos e interesses pessoais.">
 <meta name="theme-color" content="#78AEB5">
-
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Nunito+Sans:wght@400;600&display=swap">
 <link rel="stylesheet" href="style.css">
 <script src="script.js" defer></script>
 </head>
@@ -69,42 +66,60 @@
           </div>
           </section>
           <section class="cartao compras wl" aria-label="Wishlist">
-            <div class="wl-topo">
-              <span class="wl-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="9" width="14" height="11" rx="2"/><path d="M9 9V7a3 3 0 0 1 6 0v2"/></svg></span>
-              <h2>Wishlist</h2>
-              <label class="wl-busca"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><input type="search" id="wl-busca" placeholder="Buscar na wishlist…" autocomplete="off" aria-label="Buscar na wishlist"></label>
-            </div>
+            <h2 class="acc"><button type="button" class="acc-btn" id="abrir-wishlist" aria-expanded="false" aria-controls="corpo-wishlist"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="9" width="14" height="11" rx="2"/><path d="M9 9V7a3 3 0 0 1 6 0v2"/></svg><span>Wishlist</span><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></button></h2>
+            <div id="corpo-wishlist" hidden>
             <div class="wl-abas" role="tablist">
               <button type="button" role="tab" class="wl-aba" id="aba-fav" aria-selected="true" aria-controls="wl-p-fav"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1L3.2 9.5l6.1-.9z"/></svg><b>Favoritados</b> <span>(<span id="ct-fav" aria-live="polite">0</span>)</span></button>
-              <button type="button" role="tab" class="wl-aba" id="aba-qc" aria-selected="false" aria-controls="wl-p-qc"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3h12v18l-6-4-6 4z"/></svg><b>Quero Comprar</b> <span>(<span id="ct-qc">0</span>)</span></button>
+              <button type="button" role="tab" class="wl-aba" id="aba-qc" aria-selected="false" aria-controls="wl-p-qc"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3h12v18l-6-4-6 4z"/></svg><b>Quero comprar</b> <span>(<span id="ct-qc">0</span>)</span></button>
             </div>
-            <div class="wl-painel" id="wl-p-fav" role="tabpanel">
-              <div class="wl-filtros">
-                <div class="wl-cab"><h3>Filtros</h3><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"/><circle cx="9" cy="6" r="2"/><circle cx="15" cy="12" r="2"/><circle cx="9" cy="18" r="2"/></svg></div>
-                <label class="wl-campo">Categoria<select id="wl-cat"><option value="">Todas</option></select></label>
-                <button type="button" class="wl-limpar" id="wl-limpar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 12a8 8 0 1 0 2.4-5.7L4 8.5M4 4v4.5h4.5"/></svg>Limpar filtros</button>
-              </div>
+            <div class="wl-painel" id="wl-p-fav" role="tabpanel" aria-labelledby="aba-fav">
               <div class="wl-lista">
                 <div class="wl-cab"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1L3.2 9.5l6.1-.9z"/></svg><h3>Favoritados <span>(<span id="ct-fav2">0</span>)</span></h3></div>
                 <div class="acc-corpo" id="corpo-fav">
-                <div class="filtro" hidden role="group" aria-label="Filtrar por tema" data-alvo="tab-fav"><svg class="funil" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 5h18l-7 8v6l-4-2v-4z"/></svg><button type="button" class="chip" aria-pressed="true" data-tema="">Todos</button><button type="button" class="chip" aria-pressed="false" data-tema="Maquiagem">Maquiagem</button><button type="button" class="chip" aria-pressed="false" data-tema="Pele">Pele</button><button type="button" class="chip" aria-pressed="false" data-tema="Corpo">Corpo</button><button type="button" class="chip" aria-pressed="false" data-tema="Perfume">Perfume</button></div>
+                <div class="filtro" role="group" aria-label="Filtrar por tema" data-alvo="tab-fav"><svg class="funil" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 5h18l-7 8v6l-4-2v-4z"/></svg><button type="button" class="chip" aria-pressed="true" data-tema="">Todos</button><button type="button" class="chip" aria-pressed="false" data-tema="Maquiagem">Maquiagem</button><button type="button" class="chip" aria-pressed="false" data-tema="Pele">Pele</button><button type="button" class="chip" aria-pressed="false" data-tema="Corpo">Corpo</button><button type="button" class="chip" aria-pressed="false" data-tema="Perfume">Perfume</button></div>
                 <div class="tabela fav" id="tab-fav"><div class="tab-cab"><span>Tema</span><span>Produto</span><span></span></div></div>
                 <div class="novo" id="novo-fav" role="button" tabindex="0"><svg class="mais" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg><span>Novo favorito</span></div>
                 </div>
                 <div class="wl-rodape"><span id="wl-info"></span><div class="wl-pag" role="navigation" aria-label="Páginas"><button type="button" class="wl-pg seta" id="wl-ant" aria-label="Página anterior"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 6-6 6 6 6"/></svg></button><span id="wl-nums"></span><button type="button" class="wl-pg seta" id="wl-prox" aria-label="Próxima página"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 6 6 6-6 6"/></svg></button></div></div>
               </div>
             </div>
-            <div class="wl-painel qc" id="wl-p-qc" role="tabpanel" hidden>
+            <div class="wl-painel qc" id="wl-p-qc" role="tabpanel" aria-labelledby="aba-qc" hidden>
               <div class="wl-lista">
-                <div class="wl-cab"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3h12v18l-6-4-6 4z"/></svg><h3>Quero Comprar</h3></div>
+                <div class="wl-cab"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3h12v18l-6-4-6 4z"/></svg><h3>Quero comprar</h3></div>
                 <div id="corpo-qc"><ul class="lista-compras"><li class="cmp"><button type="button" class="marca-af" aria-pressed="false" aria-label="Marcar compra 1"><span class="bolinha"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg></span></button><input class="txt-af" type="text" maxlength="120" autocomplete="off" aria-label="Compra 1" placeholder="Escreva o que quer comprar…"></li><li class="cmp"><button type="button" class="marca-af" aria-pressed="false" aria-label="Marcar compra 2"><span class="bolinha"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg></span></button><input class="txt-af" type="text" maxlength="120" autocomplete="off" aria-label="Compra 2" placeholder="Escreva o que quer comprar…"></li><li class="cmp"><button type="button" class="marca-af" aria-pressed="false" aria-label="Marcar compra 3"><span class="bolinha"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg></span></button><input class="txt-af" type="text" maxlength="120" autocomplete="off" aria-label="Compra 3" placeholder="Escreva o que quer comprar…"></li><li class="cmp"><button type="button" class="marca-af" aria-pressed="false" aria-label="Marcar compra 4"><span class="bolinha"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg></span></button><input class="txt-af" type="text" maxlength="120" autocomplete="off" aria-label="Compra 4" placeholder="Escreva o que quer comprar…"></li><li class="cmp"><button type="button" class="marca-af" aria-pressed="false" aria-label="Marcar compra 5"><span class="bolinha"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg></span></button><input class="txt-af" type="text" maxlength="120" autocomplete="off" aria-label="Compra 5" placeholder="Escreva o que quer comprar…"></li><li class="cmp" style="visibility:hidden" aria-hidden="true"><button type="button" class="marca-af" aria-pressed="false" aria-label="Marcar compra 6"><span class="bolinha"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg></span></button><input class="txt-af" type="text" maxlength="120" autocomplete="off" aria-label="Compra 6" placeholder="Escreva o que quer comprar…"></li><li class="cmp" style="visibility:hidden" aria-hidden="true"><button type="button" class="marca-af" aria-pressed="false" aria-label="Marcar compra 7"><span class="bolinha"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg></span></button><input class="txt-af" type="text" maxlength="120" autocomplete="off" aria-label="Compra 7" placeholder="Escreva o que quer comprar…"></li></ul></div>
               </div>
+            </div>
             </div>
           </section>
         </div>
         <section class="item senhas">
           <button type="button" class="senhas-cab" id="abrir-senhas" aria-expanded="false" aria-controls="painel-senhas"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg><span><span class="nome">Informações</span></span><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></button>
           <div class="senhas-lista" id="painel-senhas" hidden></div>
+        </section>
+        <section class="cartao gastos" id="gastos" aria-label="Controle de Gastos">
+          <h2 class="gs-cab"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 7.5A2.5 2.5 0 0 1 6.5 5H18v3"/><path d="M4 7.5V17a2 2 0 0 0 2 2h12a1 1 0 0 0 1-1V9a1 1 0 0 0-1-1H6.5A2.5 2.5 0 0 1 4 5.5"/><circle cx="15.5" cy="13.5" r="1" fill="currentColor"/></svg><span>Controle de Gastos</span></h2>
+          <div class="acc-corpo" id="corpo-gastos">
+            <div class="gs-topo">
+              <div class="gs-resumo">
+                <div><span class="gs-rot">Gasto deste mês</span><strong id="gs-total">R$ 0,00</strong><span class="gs-var" id="gs-var"></span></div>
+              </div>
+              <div class="gs-bloco"><h3><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 20v-5M10 20V8M15 20v-9M20 20V4" transform="translate(-1 0) scale(.95 1)"/></svg>Gastos nos últimos 6 meses</h3><svg class="gs-barras" id="gs-barras" viewBox="0 0 320 150" role="img" aria-label="Gastos por mês"></svg></div>
+              <div class="gs-bloco gs-lim"><h3><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3 4.500 6v5.500c0 4.600 3.100 8.200 7.500 9.500 4.400-1.300 7.500-4.900 7.500-9.500V6z"/><path d="m8.800 12 2.400 2.400 4.200-4.600"/></svg>Limite do mês<button type="button" class="gs-lim-edit" id="gs-lim-edit" aria-label="Editar limite" title="Editar limite"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20h4L19 9l-4-4L4 16z"/><path d="m13.500 6.500 4 4"/></svg></button></h3>
+                <div class="gs-lim-corpo"><svg class="gs-anel" id="gs-anel" viewBox="0 0 100 100" role="img" aria-label="Uso do limite do mês"></svg><div class="gs-lim-txt"><span id="gs-lim-usado">Defina o limite do mês.</span><strong id="gs-lim-resta"></strong></div></div>
+                <form class="gs-lim-form" id="gs-lim-form" autocomplete="off" hidden><input type="text" id="gs-lim-valor" inputmode="decimal" placeholder="Limite (R$)" aria-label="Limite do mês"><button type="submit" class="gs-add">Salvar</button></form>
+              </div>
+            </div>
+            <form class="gs-form" id="gs-form" autocomplete="off">
+              <input type="text" id="gs-desc" maxlength="60" placeholder="Descrição" aria-label="Descrição">
+              <input type="text" id="gs-valor" inputmode="decimal" placeholder="Valor (R$)" aria-label="Valor" required>
+                            <div class="gs-data"><button type="button" class="gs-data-btn" id="gs-data-btn" aria-haspopup="dialog" aria-expanded="false" aria-label="Escolher data"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3.500" y="5" width="17" height="15.500" rx="2.500"/><path d="M3.500 10h17M8 3v4M16 3v4"/></svg><span id="gs-data-txt"></span></button><input type="hidden" id="gs-data"><div class="gs-cal" id="gs-cal" role="dialog" aria-label="Calendário" hidden></div></div>
+              <button type="submit" class="gs-add">Adicionar</button>
+            </form>
+            <div class="gs-lanc">
+              <div class="gs-lanc-topo"><h3>Últimos lançamentos</h3><button type="button" class="gs-ver" id="gs-ver" hidden>Ver todos →</button></div>
+              <ul class="gs-lista" id="gs-lista"></ul>
+            </div>
+          </div>
         </section>
       </div>
     </div>
@@ -301,12 +316,12 @@
           <textarea id="notas-projetos-txt" rows="5" placeholder="Escreva aqui suas anotações…"></textarea>
         </div>
       </div>
-      <section class="cartao proj" id="proj" aria-label="Meus projetos">
+      <section class="cartao proj proj-simples" id="proj" aria-label="Meus projetos">
         <div class="cartao-topo"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg><h2>Meus projetos</h2><span class="cont" id="ct-proj" aria-live="polite"></span></div>
-        <div class="filtro" role="group" aria-label="Filtrar por tema" id="filtro-proj" data-alvo="tab-proj"><svg class="funil" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 5h18l-7 8v6l-4-2v-4z"/></svg><button type="button" class="chip" aria-pressed="true" data-tema="">Todos</button></div>
+        <div class="filtro" id="filtro-proj" data-alvo="tab-proj" hidden></div>
         <div class="tabela" id="tab-proj">
-          <div class="tab-cab"><span>Data</span><span>Pasta</span><span>Tema</span><span>Link</span><span></span></div></div>
-        <div class="novo" id="novo-proj" role="button" tabindex="0"><svg class="mais" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg><span>Nova pasta</span></div>
+          <div class="tab-cab"><span>Data</span><span>Projeto</span><span>Link</span><span></span></div></div>
+        <div class="novo" id="novo-proj" role="button" tabindex="0"><svg class="mais" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg><span>Novo projeto</span></div>
       </section>
       <section class="cartao proj" id="insp" aria-label="Inspirações">
         <div class="cartao-topo"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 4l1.9 5.1L17 11l-5.1 1.9L10 18l-1.9-5.1L3 11l5.1-1.9z"/><path d="M19 3v4M17 5h4"/></svg><h2>Inspirações</h2><span class="cont" id="ct-insp" aria-live="polite"></span></div>
