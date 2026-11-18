@@ -1,6 +1,3 @@
-/* Ingryd’s Workspace — scripts */
-
-/* ===== Áreas, listas e preferências ===== */
 (function(){
 
   (function(){
@@ -1134,7 +1131,11 @@ const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const db = getFirestore(app);
 
+<<<<<<< HEAD
 const CHAVES = ["temas-extra","pessoal-afazeres","notas-pessoal","metas","progresso-semana","higienizacao_link","wishlist","informacoes","ideias","favoritos","edicoes","notas-estudos","calendario-estudos","anotacoes-estudos","aprender","projetos","projetos-temas","projetos-afazeres","notas-projetos","inspiracoes","inspiracoes-temas","gastos","gastos-limite"];
+=======
+const CHAVES = ["temas-extra","pessoal-afazeres","notas-pessoal","metas","progresso-semana","higienizacao_link","wishlist","informacoes","ideias","favoritos","edicoes","notas-estudos","calendario-estudos","anotacoes-estudos","aprender","projetos","projetos-temas","projetos-afazeres","trabalho-afazeres","notas-projetos","inspiracoes","inspiracoes-temas"];
+>>>>>>> 8dd05e4c9c53f5dbcfce8541fa777893831c4e38
 const btn = document.getElementById("sync"), txt = document.getElementById("sync-txt");
 btn.hidden = false; window.__syncOk = true;
 function estado(e, t){ btn.dataset.e = e; txt.textContent = t; }
