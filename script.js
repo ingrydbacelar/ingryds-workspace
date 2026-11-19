@@ -1134,7 +1134,7 @@ const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const db = getFirestore(app);
 
-const CHAVES = ["temas-extra","pessoal-afazeres","notas-pessoal","metas","progresso-semana","higienizacao_link","wishlist","informacoes","ideias","favoritos","edicoes","notas-estudos","calendario-estudos","anotacoes-estudos","aprender","projetos","projetos-temas","projetos-afazeres","notas-projetos","inspiracoes","inspiracoes-temas","gastos","gastos-limite"];
+const CHAVES = ["temas-extra","pessoal-afazeres","notas-pessoal","metas","progresso-semana","higienizacao_link","wishlist","informacoes","ideias","favoritos","edicoes","notas-estudos","calendario-estudos","anotacoes-estudos","aprender","projetos","projetos-temas","projetos-afazeres","notas-projetos","inspiracoes","inspiracoes-temas","gastos","gastos-limite","trabalho-afazeres"];
 const btn = document.getElementById("sync"), txt = document.getElementById("sync-txt");
 btn.hidden = false; window.__syncOk = true;
 function estado(e, t){ btn.dataset.e = e; txt.textContent = t; }
@@ -1369,16 +1369,19 @@ window.addEventListener("pagehide", () => { if (pendente) enviar(); });
   var MESES=["Janeiro","Fevereiro","Março","Abril","Maio","Junho","Julho","Agosto","Setembro","Outubro","Novembro","Dezembro"];
   var btnD=document.getElementById("gs-data-btn"), txtD=document.getElementById("gs-data-txt"), cal=document.getElementById("gs-cal"), vis=mesDe(dt.value);
   function mostraData(){ txtD.textContent=dataBR(dt.value); }
+  var DIAS=["Dom","Seg","Ter","Qua","Qui","Sex","Sáb"];
+  function dataLonga(iso){ var d=new Date(+iso.slice(0,4),+iso.slice(5,7)-1,+iso.slice(8,10)); return DIAS[d.getDay()]+", "+d.getDate()+" de "+MESES[d.getMonth()].toLowerCase(); }
   function desenhaCal(){
     var a=+vis.slice(0,4), m=+vis.slice(5,7)-1, prim=new Date(a,m,1).getDay(), hj=hoje();
-    var h='<div class="gs-cal-topo"><button type="button" class="gs-cal-nav" data-nav="-1" aria-label="Mês anterior"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 6-6 6 6 6"/></svg></button><strong>'+MESES[m]+' '+a+'</strong><button type="button" class="gs-cal-nav" data-nav="1" aria-label="Próximo mês"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 6 6 6-6 6"/></svg></button></div><div class="gs-cal-sem">';
-    ["D","S","T","Q","Q","S","S"].forEach(function(s){ h+='<span>'+s+'</span>'; });
-    h+='</div><div class="gs-cal-dias">';
+    var seta=function(n,d,t){ return '<button type="button" class="gs-cal-nav" data-nav="'+n+'" aria-label="'+t+'"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="'+d+'"/></svg></button>'; };
+    var h='<div class="gs-cal-topo">'+seta(-1,"m15 6-6 6 6 6","Mês anterior")+'<strong aria-live="polite">'+MESES[m]+' <span class="gs-cal-ano">'+a+'</span></strong>'+seta(1,"m9 6 6 6-6 6","Próximo mês")+'</div><div class="gs-cal-sem" aria-hidden="true">';
+    ["D","S","T","Q","Q","S","S"].forEach(function(x){ h+='<span>'+x+'</span>'; });
+    h+='</div><div class="gs-cal-dias" role="group" aria-label="Dias do mês">';
     for(var i=0;i<42;i++){
       var d=new Date(a,m,i-prim+1), iso=d.getFullYear()+"-"+pad(d.getMonth()+1)+"-"+pad(d.getDate());
-      h+='<button type="button" class="gs-dia'+(d.getMonth()!==m?' fora':'')+(iso===hj?' hoje':'')+(iso===dt.value?' sel':'')+'" data-d="'+iso+'">'+d.getDate()+'</button>';
+      h+='<button type="button" class="gs-dia'+(d.getMonth()!==m?' fora':'')+(iso===hj?' hoje':'')+(iso===dt.value?' sel':'')+'" data-d="'+iso+'"'+(iso===dt.value?' aria-pressed="true"':'')+'>'+d.getDate()+'</button>';
     }
-    h+='</div><div class="gs-cal-rod"><button type="button" class="gs-cal-hoje" data-hoje="1">Hoje</button></div>';
+    h+='</div><div class="gs-cal-rod"><span class="gs-cal-sel">'+dataLonga(dt.value)+'</span><button type="button" class="gs-cal-hoje" data-hoje="1"><i aria-hidden="true"></i>Hoje</button></div>';
     cal.innerHTML=h;
   }
   function abreCal(ab){
@@ -1388,11 +1391,16 @@ window.addEventListener("pagehide", () => { if (pendente) enviar(); });
   btnD.addEventListener("click",function(){ abreCal(cal.hidden); });
   cal.addEventListener("click",function(e){
     var n=e.target.closest("[data-nav]"), d=e.target.closest("[data-d]"), t=e.target.closest("[data-hoje]");
-    if(n){ vis=mesDesloc(vis,+n.dataset.nav); desenhaCal(); return; }
+    if(n){ var sentido=n.dataset.nav; vis=mesDesloc(vis,+sentido); desenhaCal(); var nb=cal.querySelector('[data-nav="'+sentido+'"]'); if(nb) nb.focus(); return; }
     if(d){ dt.value=d.dataset.d; mostraData(); abreCal(false); btnD.focus(); return; }
     if(t){ dt.value=hoje(); mostraData(); abreCal(false); btnD.focus(); }
   });
-  document.addEventListener("click",function(e){ if(!cal.hidden&&!e.target.closest(".gs-data")) abreCal(false); });
+  document.addEventListener("click",function(e){
+    if(cal.hidden) return;
+    var rota=e.composedPath?e.composedPath():[];   // caminho calculado no momento do clique (o alvo pode ter sido redesenhado)
+    var dentro=rota.some(function(n){ return n&&n.classList&&n.classList.contains("gs-data"); });
+    if(!dentro) abreCal(false);
+  });
   document.addEventListener("keydown",function(e){ if(e.key==="Escape"&&!cal.hidden){ abreCal(false); btnD.focus(); } });
   mostraData();
   function resumo(){

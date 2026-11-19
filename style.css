@@ -2,7 +2,7 @@
 :root{
   --ceu:#cfe3e4; --ceu-2:#b7d3d7; --turquesa:#6fa3b0; --profundo:#2c5866;
   --oliva:#7d8b5c; --flor:#f4f1dc; --rosa:#e6bfb8; --tinta:#25353a; --tinta-2:#4d6268;
-  --quadro:none;
+  --quadro:url(amendoeira.png);
   --superficie:#f7f5e6; --borda:#b3ccd0;
   box-sizing:border-box;
   padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
@@ -962,26 +962,6 @@ select.cal-in option{background:var(--superficie);color:var(--tinta)}
 .gs-data-btn:hover,.gs-data-btn[aria-expanded="true"]{border-color:var(--turquesa)}
 .gs-data-btn:focus-visible{outline:2px solid var(--turquesa);outline-offset:2px}
 .gs-data .gs-data-btn svg{position:static;width:17px;height:17px;flex:none;color:var(--turquesa)}
-.gs-cal{position:absolute;z-index:30;top:calc(100% + 8px);left:0;width:262px;padding:12px;border-radius:18px;background:var(--gs-card);border:1px solid var(--borda);box-shadow:0 12px 32px -10px rgba(20,40,45,.35),0 2px 6px rgba(20,40,45,.08)}
-.gs-cal[hidden]{display:none}
-.gs-cal-topo{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px}
-.gs-cal-topo strong{font:600 .95rem Fraunces,Georgia,serif;color:var(--tinta)}
-.gs-cal button{all:unset;box-sizing:border-box;cursor:pointer;text-align:center}
-.gs-cal button:focus-visible{outline:2px solid var(--turquesa);outline-offset:1px}
-.gs-cal-nav{width:28px;height:28px;display:grid!important;place-items:center;border-radius:50%;color:var(--tinta-2)}
-.gs-cal-nav svg{width:16px;height:16px}
-.gs-cal-nav:hover{background:color-mix(in srgb,var(--turquesa) 22%,transparent);color:var(--tinta)}
-.gs-cal-sem,.gs-cal-dias{display:grid;grid-template-columns:repeat(7,1fr);gap:2px}
-.gs-cal-sem span{text-align:center;font-size:.7rem;font-weight:600;color:var(--tinta-2);padding:4px 0}
-.gs-dia{height:32px;line-height:32px;border-radius:50%;font-size:.82rem;color:var(--tinta)}
-.gs-dia.fora{color:var(--tinta-2);opacity:.45}
-.gs-dia:hover{background:color-mix(in srgb,var(--turquesa) 24%,transparent)}
-.gs-dia.hoje{box-shadow:inset 0 0 0 1.5px var(--turquesa)}
-.gs-dia.sel,.gs-dia.sel:hover{background:var(--profundo);color:#f4f1dc;opacity:1;font-weight:600}
-.gs-cal-rod{display:flex;justify-content:center;margin-top:8px;padding-top:8px;border-top:1px solid var(--borda)}
-.gs-cal-hoje{padding:5px 16px;border-radius:999px;font-size:.78rem;font-weight:600;color:var(--profundo)}
-:root[data-theme="dark"] .gs-cal-hoje{color:var(--turquesa)}
-.gs-cal-hoje:hover{background:color-mix(in srgb,var(--turquesa) 22%,transparent)}
 /* limite do mês: conteúdo centralizado na altura do cartão */
 .gs-lim{display:flex;flex-direction:column}
 .gs-lim-corpo{flex:1;align-items:center;margin-top:0}
@@ -992,22 +972,39 @@ select.cal-in option{background:var(--superficie);color:var(--tinta)}
 .gs-lim .gs-anel{width:88px;height:88px}
 .gs-lim .gs-lim-txt{font-size:.82rem}
 .gs-lim .gs-lim-txt strong{font-size:.88rem}
-/* calendário (seletores mais fortes, pois ".gs-cal button{all:unset}" anulava o estilo dos dias) */
-.gs-cal{width:276px;padding:14px 14px 10px;border-radius:20px;font-family:"Nunito Sans",system-ui,sans-serif}
-.gs-cal .gs-cal-topo{margin-bottom:10px;padding:0 2px}
-.gs-cal .gs-cal-topo strong{font:600 1rem Fraunces,Georgia,serif}
-.gs-cal .gs-cal-nav{display:grid;place-items:center;width:30px;height:30px;border-radius:50%;background:color-mix(in srgb,var(--turquesa) 14%,transparent);color:var(--profundo)}
-:root[data-theme="dark"] .gs-cal .gs-cal-nav{color:var(--tinta)}
-.gs-cal .gs-cal-nav:hover{background:color-mix(in srgb,var(--turquesa) 30%,transparent)}
-.gs-cal .gs-cal-sem{gap:4px;margin-bottom:2px}
-.gs-cal .gs-cal-sem span{font-size:.68rem;letter-spacing:.04em;text-transform:uppercase;padding:4px 0}
-.gs-cal .gs-cal-dias{gap:4px}
-.gs-cal .gs-dia{display:block;height:34px;line-height:34px;border-radius:12px;font-size:.86rem;color:var(--tinta);text-align:center;transition:background-color .15s,color .15s}
-.gs-cal .gs-dia.fora{color:var(--tinta-2);opacity:.4}
-.gs-cal .gs-dia:hover{background:color-mix(in srgb,var(--turquesa) 24%,transparent);opacity:1}
+
+/* ===== Calendário do Controle de gastos (seletor de data) ===== */
+.gs-cal{--gs-sel-bg:var(--profundo);--gs-sel-fg:#f4f1dc;position:absolute;z-index:30;top:calc(100% + 8px);left:0;width:min(244px,calc(100vw - 32px));padding:12px 12px 10px;border-radius:18px;font-family:"Nunito Sans",system-ui,sans-serif;color:var(--tinta);
+  background:linear-gradient(180deg,color-mix(in srgb,var(--gs-card) 100%,#fff 0%),color-mix(in srgb,var(--gs-card) 88%,var(--ceu-2)));
+  border:1px solid color-mix(in srgb,var(--borda) 80%,transparent);
+  box-shadow:0 22px 48px -18px rgba(20,40,45,.45),0 3px 10px rgba(20,40,45,.08);transform-origin:top left;animation:gsCalIn .16s ease-out}
+:root[data-theme="dark"] .gs-cal{--gs-sel-bg:var(--turquesa);--gs-sel-fg:#0f2227}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .gs-cal{--gs-sel-bg:var(--turquesa);--gs-sel-fg:#0f2227}}
+@keyframes gsCalIn{from{opacity:0;transform:translateY(-4px) scale(.98)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion:reduce){.gs-cal{animation:none}}
+.gs-cal[hidden]{display:none}
+.gs-cal button{all:unset;box-sizing:border-box;cursor:pointer;text-align:center}
+.gs-cal button:focus-visible{outline:2px solid var(--turquesa);outline-offset:2px}
+.gs-cal-topo{display:flex;align-items:center;justify-content:space-between;gap:6px;padding-bottom:8px;margin-bottom:8px;border-bottom:1.5px dotted var(--borda)}
+.gs-cal-topo strong{font:600 1rem/1 Fraunces,Georgia,serif;color:var(--tinta);letter-spacing:-.01em;white-space:nowrap}
+.gs-cal-ano{font:600 .68rem "Nunito Sans",sans-serif;color:var(--tinta-2);margin-left:3px;letter-spacing:0}
+.gs-cal .gs-cal-nav{display:grid;place-items:center;width:28px;height:28px;border-radius:50%;border:1.5px solid var(--borda);background:color-mix(in srgb,var(--gs-card) 70%,transparent);color:var(--tinta);transition:background-color .15s,border-color .15s,transform .15s}
+.gs-cal .gs-cal-nav svg{position:static;left:auto;width:14px;height:14px;color:inherit}
+.gs-cal .gs-cal-nav:hover{background:color-mix(in srgb,var(--turquesa) 20%,transparent);border-color:var(--turquesa)}
+.gs-cal .gs-cal-nav:active{transform:scale(.94)}
+.gs-cal-sem,.gs-cal-dias{display:grid;grid-template-columns:repeat(7,1fr);gap:2px 1px}
+.gs-cal-sem{margin-bottom:3px}
+.gs-cal-sem span{text-align:center;font-size:.62rem;font-weight:700;letter-spacing:.05em;color:var(--oliva);padding:2px 0}
+.gs-cal .gs-dia{position:relative;display:grid;place-items:center;width:100%;max-width:30px;aspect-ratio:1;margin:0 auto;border-radius:50%;font-size:.78rem;font-weight:500;color:var(--tinta);transition:background-color .15s,color .15s,box-shadow .15s}
+.gs-cal .gs-dia.fora{color:var(--tinta-2);opacity:.38}
+.gs-cal .gs-dia:hover{background:color-mix(in srgb,var(--turquesa) 22%,transparent);opacity:1}
 .gs-cal .gs-dia.hoje{box-shadow:inset 0 0 0 1.5px var(--turquesa);font-weight:700}
-.gs-cal .gs-dia.sel,.gs-cal .gs-dia.sel:hover{background:var(--profundo);color:#f4f1dc;box-shadow:none;font-weight:700;opacity:1}
-.gs-cal .gs-cal-rod{margin-top:10px;padding-top:8px}
-.gs-cal .gs-cal-hoje{display:inline-block;padding:6px 18px;border-radius:999px;font-size:.8rem;font-weight:700;color:var(--profundo);background:color-mix(in srgb,var(--turquesa) 14%,transparent)}
-:root[data-theme="dark"] .gs-cal .gs-cal-hoje{color:var(--tinta)}
-.gs-cal .gs-cal-hoje:hover{background:color-mix(in srgb,var(--turquesa) 30%,transparent)}
+.gs-cal .gs-dia.hoje::after{content:"";position:absolute;bottom:3px;left:50%;width:3px;height:3px;margin-left:-1.5px;border-radius:50%;background:var(--turquesa)}
+.gs-cal .gs-dia.sel,.gs-cal .gs-dia.sel:hover{background:var(--gs-sel-bg);color:var(--gs-sel-fg);box-shadow:0 4px 10px -3px color-mix(in srgb,var(--gs-sel-bg) 70%,transparent);font-weight:700;opacity:1}
+.gs-cal .gs-dia.sel.hoje::after{background:var(--gs-sel-fg)}
+.gs-cal-rod{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:8px;padding-top:8px;border-top:1.5px dotted var(--borda)}
+.gs-cal-sel{font-size:.7rem;color:var(--tinta-2)}
+.gs-cal .gs-cal-hoje{display:inline-flex;align-items:center;gap:6px;padding:4px 11px;border-radius:999px;border:1.5px solid var(--borda);background:color-mix(in srgb,var(--gs-card) 70%,transparent);font-size:.74rem;font-weight:700;color:var(--tinta);transition:background-color .15s,border-color .15s}
+.gs-cal .gs-cal-hoje i{width:6px;height:6px;border-radius:50%;background:var(--turquesa)}
+.gs-cal .gs-cal-hoje:hover{background:color-mix(in srgb,var(--turquesa) 20%,transparent);border-color:var(--turquesa)}
+@media (max-width:520px){.gs-cal{left:50%;transform:translateX(-50%);transform-origin:top center;animation:none}}
