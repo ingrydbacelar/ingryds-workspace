@@ -587,7 +587,7 @@ select.cal-in option{background:var(--superficie);color:var(--tinta)}
   .proj-simples .tab-lin>:nth-child(4){grid-area:rem}
 }
 
-/* Inspirações: sem coluna de data */
+/* Acervo: sem coluna de data */
 #insp .tab-cab,#insp .tab-lin{grid-template-columns:minmax(0,1fr) 96px minmax(0,150px) 28px}
 @media (max-width:600px){
   #insp .tab-lin{grid-template-columns:auto minmax(0,1fr) 28px;grid-template-areas:"tx tx rem" "tg lk lk"}

@@ -744,7 +744,7 @@
   window.addEventListener("hashchange",function(){ setTimeout(ajusta,0); });
 })();
 
-/* ===== Projetos: listas com data, tema e link (Meus projetos e Inspirações) ===== */
+/* ===== Projetos: listas com data, tema e link (Meus projetos e Acervo) ===== */
 (function(){
   var PAL=["#6fa3b0","#7d8b5c","#d8c47a","#d9a9a1","#b58fc4","#e0955f","#5fae9b","#c77d8a"];
   function corDe(t){ var h=0; for(var i=0;i<t.length;i++) h=(h*31+t.charCodeAt(i))>>>0; return PAL[h%PAL.length]; }
@@ -857,7 +857,7 @@
     semTema:true,
     phTitulo:"Título do projeto…",rotuloTitulo:"Título do projeto",rotuloTema:"Tema",phLink:"Link do projeto",confirmaRem:"Remover este projeto da lista?",max:200});
   lista({raiz:"insp",chave:"inspiracoes",chaveTemas:"inspiracoes-temas",tab:"tab-insp",cont:"ct-insp",filtro:"filtro-insp",novo:"novo-insp",temas:["Site","Ideia"],data:false,
-    phTitulo:"Descreva a inspiração…",rotuloTitulo:"Inspiração",rotuloTema:"Tipo",phLink:"Link (opcional)",confirmaRem:"Remover esta inspiração?",max:300});
+    phTitulo:"Descreva o item…",rotuloTitulo:"Item",rotuloTema:"Tipo",phLink:"Link (opcional)",confirmaRem:"Remover este item?",max:300});
 })();
 
 /* ===== Modo edição ===== */
